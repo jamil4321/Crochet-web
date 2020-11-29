@@ -6,7 +6,7 @@ class Form extends Component{
     state ={
         ItemName:'',
         setCategory: '',
-        cat:["KeyChains","HandBags & Clutches","Accessories","Shawls","Mittens"],
+        cat:["KeyChains","HandBags & Clutches","Accessories"],
         price:'',
         pictures: []
     }
