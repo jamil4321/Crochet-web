@@ -22,7 +22,9 @@ import ProductSection from "./Sections/ProductSection.js";
 import TeamSection from "./Sections/TeamSection.js";
 import WorkSection from "./Sections/WorkSection.js";
 import OurVision from "./Sections/OurVision.js";
-import NavigationTAb from './Sections/SectionTabs.js'
+import NavigationTAb from './Sections/SectionTabs.js';
+
+import {useDispatch,useSelector} from 'react-redux';
 
 const dashboardRoutes = [];
 
