@@ -1,0 +1,9 @@
+{
+    "cat":["KeyChains","HandBags & Clutches","Accessories","Shawls","Mittens"],
+    "subCat":[{
+        "id" : 123456,
+        "name" : "cupcake",
+        "cat": "KeyChains",
+        "price": 1000
+    }]
+}

@@ -61,16 +61,12 @@ export default function LandingPage(props) {
       </Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <ProductSection />
+        <TeamSection />
 
         </div>
       </div>
-      <TeamSection />
-      <div className={classNames(classes.main, classes.mainRaised)}>
-        <div className={classes.container}>
-          <OurVision />
-        </div>
-      </div>
+   
+    <OurVision />
       <NavigationTAb />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
