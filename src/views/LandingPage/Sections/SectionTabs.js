@@ -8,6 +8,7 @@ import CustomTabs from "components/CustomTabs/CustomTabs.js";
 
 
 import styles from "assets/jss/material-kit-react/views/componentsSections/tabsStyle.js";
+import {useSelector} from 'react-redux'
 
 import Menu from './Menu'
 
@@ -16,6 +17,12 @@ const useStyles = makeStyles(styles);
 
 export default function SectionTabs() {
   const classes = useStyles();
+  const {cat,subCat} = useSelector((state) => {
+    return {
+        cat: state.cat,
+        subCat:state.subCat
+    }
+})
   return (
     <div className={classes.section}>
       {/* <div className={classes.container}>
@@ -25,26 +32,37 @@ export default function SectionTabs() {
         <GridItem xs={12} sm={12} md={12}>
           <CustomTabs
             headerColor="info"
-            tabs={[
-              {
-                tabName: "Profile",
-                tabContent: (
-                  <Menu />
-                )
-              },
-              {
-                tabName: "Messages",
-                tabContent: (
-                  <Menu />
-                )
-              },
-              {
-                tabName: "Settings",
-                tabContent: (
-                  <Menu />
-                )
-              }
-            ]}
+            tabs={
+              cat.map((data,i)=>{
+                const dataReturn = {
+                                tabName: data,
+                                tabContent: (<Menu Cat={data} key={i} />)
+
+                            }
+                  return dataReturn
+              })
+              
+            //   [
+            //   {
+            //     tabName: "Profile",
+            //     tabContent: (
+            //       <Menu />
+            //     )
+            //   },
+            //   {
+            //     tabName: "Messages",
+            //     tabContent: (
+            //       <Menu />
+            //     )
+            //   },
+            //   {
+            //     tabName: "Settings",
+            //     tabContent: (
+            //       <Menu />
+            //     )
+            //   }
+            // ]
+            }
           />
         </GridItem>
       </GridContainer>

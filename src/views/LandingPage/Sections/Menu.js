@@ -1,6 +1,6 @@
 import React from 'react';
 // nodejs library that concatenates classes
-import classNames from "classnames";
+// import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -23,6 +23,8 @@ import team2 from "assets/img/Owl Pouch1.jpg";
 import team3 from "assets/img/cupcake.jpg";
 
 
+import {useSelector} from 'react-redux'
+
 
 let style = {
     ...imagesStyles,
@@ -30,57 +32,42 @@ let style = {
     cardTitle,
 }
 
-const useStyles = makeStyles(styles);
+const useStyles = makeStyles(style);
 
-const Menu = () => {
+const Menu = (props) => {
     const classes = useStyles();
+    const {subCat,img} = useSelector((state) => {
+        return {
+            subCat:state.subCat,
+            img:state.img
+        }
+    })
+    console.log('subCat',subCat,"img",img)
+    const filterCat =Object.values(subCat).filter(data=>data.setCategory === props.Cat)
+    console.log('filter',filterCat,"props",props.Cat)
     return (
         <GridContainer>
-            <GridItem xs={12} sm={12} md={4}>
+        {
+            filterCat.map((data,i)=>
+           <GridItem xs={12} sm={12} md={4} key={data+i}>
                 <Card >
-                    <img
-                        style={{ width: "100%", display: "block" }}
-                        className={classes.imgCardTop}
-                        src={team2}
-                        alt="Card-img-cap"
-                    />
-                    <CardBody>
-                        <h4 className={classes.cardTitle}>Card title</h4>
-                        <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <Button color="primary">Do something</Button>
-                    </CardBody>
-                </Card>
-            </GridItem>
-            <GridItem xs={12} sm={12} md={4}>
-                <Card >
-                    <img
-                        style={{ width: "100%", display: "block" }}
-                        className={classes.imgCardTop}
-                        src={team3}
-                        alt="Card-img-cap"
-                    />
-                    <CardBody>
-                        <h4 className={classes.cardTitle}>Card title</h4>
-                        <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <Button color="primary">Do something</Button>
-                    </CardBody>
-                </Card>
-            </GridItem>
-            <GridItem xs={12} sm={12} md={4}>
-                <Card>
-                    <img
-                        style={{ width: "100%", display: "block" }}
-                        className={classes.imgCardTop}
-                        src={team1}
-                        alt="Card-img-cap"
-                    />
-                    <CardBody>
-                        <h4 className={classes.cardTitle}>Card title</h4>
-                        <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <Button color="primary">Do something</Button>
-                    </CardBody>
-                </Card>
-            </GridItem>
+                <img
+                    style={{ width: "100%", display: "block" }}
+                    className={classes.imgCardTop}
+                    src={Object.values(img).filter(imgData=> imgData.name ===data.itemId )[0].url}
+                    alt="Card-img-cap"
+                />
+                <CardBody>
+                    <h4 className={classes.cardTitle}>{data.itemName}</h4>
+                    <p>{data.price}</p>
+                    <Button color="primary">Do something</Button>
+                </CardBody>
+            </Card>
+        </GridItem>
+            )
+        }
+            
+          
 
         </GridContainer>
     )

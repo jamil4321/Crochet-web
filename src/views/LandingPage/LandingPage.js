@@ -18,13 +18,13 @@ import Parallax from "components/Parallax/Parallax.js";
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 
 // Sections for this page
-import ProductSection from "./Sections/ProductSection.js";
 import TeamSection from "./Sections/TeamSection.js";
 import WorkSection from "./Sections/WorkSection.js";
 import OurVision from "./Sections/OurVision.js";
 import NavigationTAb from './Sections/SectionTabs.js';
+import firebase from 'Firebase.js'
 
-import {useDispatch,useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 const dashboardRoutes = [];
 
@@ -33,6 +33,35 @@ const useStyles = makeStyles(styles);
 export default function LandingPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
+  const dispatch = useDispatch();
+
+  React.useEffect(()=>{
+    firebase.database().ref('subCat').on('value', snapshot => {
+      let data = snapshot.val();
+      dispatch({type:'DATAFROMFIREBASE',payload:data})
+    })
+    firebase.database().ref('cat').on('value', snapshot => {
+      let data = snapshot.val();
+      dispatch({type:'DATAFROMFIREBASECAT',payload:data})
+    })
+    firebase.storage().ref().child('/images/').listAll().then(data=>{
+      let image = []
+      data.items.forEach(async imgRef =>{
+        await imgRef.getDownloadURL().then(async url=>{
+          let imgUrl = {
+            name:imgRef.name,
+            url:url
+          }   
+          console.log(url)
+         await image.push(imgUrl)          
+        })
+      console.log(imgRef)
+      })
+      dispatch({type:'DATAFROMFIREBASEIMAGES',payload:image})
+    })
+  },[])
+
+
   return (
     <div>
       <Header

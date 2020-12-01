@@ -1,9 +1,20 @@
 const reducer = (state, action) => {
     switch (action.type) {
         case 'DATAFROMFIREBASE':
+        console.log('data')
             return {
                 ...state,
-                subCat:[...state.subCat,action.payload]
+                subCat:action.payload
+            }
+        case 'DATAFROMFIREBASECAT':
+            return {
+                ...state,
+                cat:action.payload
+            }
+        case 'DATAFROMFIREBASEIMAGES':
+            return {
+                ...state,
+                img:action.payload
             }
         default:
             return state;
