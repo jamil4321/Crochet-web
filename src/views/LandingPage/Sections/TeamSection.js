@@ -40,15 +40,11 @@ export default function TeamSection() {
                 <img src={team1} alt="..." className={imageClasses} />
               </GridItem>
               <h4 className={classes.cardTitle}>
-                Mittens
+                Fingerless Gloves
                 <br />
                 <small className={classes.smallTitle}></small>
               </h4>
-              <CardBody>
-                <p className={classes.description}>
-                  description
-                </p>
-              </CardBody>
+              
               
             </Card>
           </GridItem>
@@ -62,11 +58,6 @@ export default function TeamSection() {
                 <br />
                 <small className={classes.smallTitle}></small>
               </h4>
-              <CardBody>
-                <p className={classes.description}>
-                  Description
-                </p>
-              </CardBody>
               
             </Card>
           </GridItem>
@@ -80,13 +71,18 @@ export default function TeamSection() {
                 <br />
                 <small className={classes.smallTitle}></small>
               </h4>
-              <CardBody>
-                <p className={classes.description}>
-                  description
-                </p>
-              </CardBody>
+             
               
             </Card>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={12}>
+          <Card plain>
+          <CardBody>
+                <p className={classes.description}>
+                All are products are made customized according to your choice of colors and designs.
+                </p>
+              </CardBody>
+          </Card>
           </GridItem>
         </GridContainer>
       </div>
