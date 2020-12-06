@@ -61,29 +61,47 @@ export default function LoginPage(props) {
       >
         <div className={classes.container}>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={4}>
+            <GridItem xs={12} sm={12} md={6}>
               <Card className={classes[cardAnimaton]}>
                 <CardHeader color="info" className={classes.cardHeader}>
                   <h4>Your Selected Items</h4>
                 </CardHeader>
                 <CardBody>
                   <List className={classes.list}>
-                    <ListItem className={classes.listItem}>About</ListItem>
+                    <ListItem className={classes.listItem}>
+                      <div style={{ display: "flex",justifyContent:'space-around' }}>
+                        <div>
+                          <h3>
+                            KeyChain
+                            <span>1</span>X<span>100</span>
+                          </h3>
+                          <p style={{ fontWeight: "bold" }}>Select Color</p>
+                          <p>Black</p>
+                          <p>White</p>
+                        </div>
+                        <div>
+                          <h3>100</h3>
+                        </div>
+                      </div>
+                    </ListItem>
                     <Divider />
                     {cart.length > 0
                       ? cart.map((data) => {
                           return (
                             <>
                               <ListItem className={classes.listItem}>
-                                <div style={{display:'flex'}}>
+                                <div style={{ display: "flex" }}>
                                   <div>
-                                    <h3>{data.itemName} <span>{data.qty}</span>X<span>{data.itemPrice}</span> </h3>
+                                    <h3>
+                                      {data.itemName} <span>{data.qty}</span>X
+                                      <span>{data.itemPrice}</span>{" "}
+                                    </h3>
                                     <p>Select Color</p>
                                     <p>{data.primaryColor}</p>
                                     <p>{data.secondaryColor}</p>
                                   </div>
-                                  <div>
-                                    <h3>{data.itemPrice *data.qty }</h3>
+                                  <div style={{ float: "left" }}>
+                                    <h3>{data.itemPrice * data.qty}</h3>
                                   </div>
                                 </div>
                               </ListItem>
