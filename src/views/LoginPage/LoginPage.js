@@ -18,20 +18,30 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
 import image from "assets/img/bg7.jpg";
+import { useSelector } from "react-redux";
+import { Divider } from "@material-ui/core";
 
 const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  setTimeout(function() {
+  setTimeout(function () {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  const { cart } = useSelector((state) => {
+    return {
+      cart: state.cart,
+    };
+  });
+  console.log(cart);
   return (
     <div>
       <Header
@@ -46,53 +56,68 @@ export default function LoginPage(props) {
         style={{
           backgroundImage: "url(" + image + ")",
           backgroundSize: "cover",
-          backgroundPosition: "top center"
+          backgroundPosition: "top center",
         }}
       >
         <div className={classes.container}>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
+                <CardHeader color="info" className={classes.cardHeader}>
+                  <h4>Your Selected Items</h4>
+                </CardHeader>
+                <CardBody>
+                  <List className={classes.list}>
+                    <ListItem className={classes.listItem}>About</ListItem>
+                    <Divider />
+                    {cart.length > 0
+                      ? cart.map((data) => {
+                          return (
+                            <>
+                              <ListItem className={classes.listItem}>
+                                <div style={{display:'flex'}}>
+                                  <div>
+                                    <h3>{data.itemName} <span>{data.qty}</span>X<span>{data.itemPrice}</span> </h3>
+                                    <p>Select Color</p>
+                                    <p>{data.primaryColor}</p>
+                                    <p>{data.secondaryColor}</p>
+                                  </div>
+                                  <div>
+                                    <h3>{data.itemPrice *data.qty }</h3>
+                                  </div>
+                                </div>
+                              </ListItem>
+                              <Divider />
+                            </>
+                          );
+                        })
+                      : null}
+                    {/* const obj = {
+      itemId: itemData.itemId,
+      itemName: itemData.itemName,
+      primaryColor,
+      secondaryColor,
+      itemPrice: itemData.price,
+      qty
+    }; */}
+                  </List>
+                </CardBody>
+                <CardFooter className={classes.cardFooter}></CardFooter>
+              </Card>
+            </GridItem>
+            <GridItem xs={12} sm={12} md={4}>
+              <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
-                  <CardHeader color="primary" className={classes.cardHeader}>
-                    <h4>Login</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-twitter"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-facebook"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-google-plus-g"} />
-                      </Button>
-                    </div>
+                  <CardHeader color="info" className={classes.cardHeader}>
+                    <h4>Place Your Order</h4>
                   </CardHeader>
-                  <p className={classes.divider}>Or Be Classical</p>
+
                   <CardBody>
                     <CustomInput
-                      labelText="First Name..."
-                      id="first"
+                      labelText="Full Name..."
+                      id="FullName"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
                         type: "text",
@@ -100,14 +125,29 @@ export default function LoginPage(props) {
                           <InputAdornment position="end">
                             <People className={classes.inputIconsColor} />
                           </InputAdornment>
-                        )
+                        ),
+                      }}
+                    />
+                    <CustomInput
+                      labelText="Phone Number"
+                      id="PhoneNumber"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        type: "Number",
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <People className={classes.inputIconsColor} />
+                          </InputAdornment>
+                        ),
                       }}
                     />
                     <CustomInput
                       labelText="Email..."
                       id="email"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
                         type: "email",
@@ -115,17 +155,17 @@ export default function LoginPage(props) {
                           <InputAdornment position="end">
                             <Email className={classes.inputIconsColor} />
                           </InputAdornment>
-                        )
+                        ),
                       }}
                     />
                     <CustomInput
-                      labelText="Password"
-                      id="pass"
+                      labelText="Address"
+                      id="Address"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
-                        type: "password",
+                        type: "textArea",
                         endAdornment: (
                           <InputAdornment position="end">
                             <Icon className={classes.inputIconsColor}>
@@ -133,14 +173,13 @@ export default function LoginPage(props) {
                             </Icon>
                           </InputAdornment>
                         ),
-                        autoComplete: "off"
+                        autoComplete: "off",
                       }}
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg">
-                      Get started
-                    </Button>
+                    <Button color="danger">Cancel Order</Button>
+                    <Button color="success">Confirm Order</Button>
                   </CardFooter>
                 </form>
               </Card>

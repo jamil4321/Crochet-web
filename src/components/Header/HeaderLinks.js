@@ -7,6 +7,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import { Link } from "react-router-dom";
 // @material-ui/icons
 
 import Button from "components/CustomButtons/Button.js";
@@ -50,13 +51,14 @@ export default function HeaderLinks(props) {
       <ListItem className={classes.listItem}>
         <Button
           color="transparent"
-          href="https://www.instagram.com/CreativeTimOfficial?ref=creativetim"
-          target="_blank"
+          to="/login-page"
           className={classes.navLink}
         >
-      <Badge badgeContent={cart.length} color={cart.length > 0 ? "primary":"error"}>
-          <ShoppingBasketIcon />
+        
+      <Badge badgeContent={cart.length} color={cart.length > 0 ? "primary":"danger"}>
+          <Link to="/login-page" style={{color:"inherit"}}><ShoppingBasketIcon /></Link>
           </Badge>
+
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
