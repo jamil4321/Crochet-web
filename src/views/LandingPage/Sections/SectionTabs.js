@@ -17,16 +17,14 @@ const useStyles = makeStyles(styles);
 
 export default function SectionTabs() {
   const classes = useStyles();
-  const {cat,subCat} = useSelector((state) => {
+  const {cat} = useSelector((state) => {
     return {
         cat: state.cat,
-        subCat:state.subCat
     }
 })
   return (
     <div className={classes.section}>
-      {/* <div className={classes.container}>
-        <div id="nav-tabs">*/}
+    
       <h2 style={{ textAlign: 'center' }}>Our Products</h2>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
@@ -42,32 +40,11 @@ export default function SectionTabs() {
                   return dataReturn
               })
               
-            //   [
-            //   {
-            //     tabName: "Profile",
-            //     tabContent: (
-            //       <Menu />
-            //     )
-            //   },
-            //   {
-            //     tabName: "Messages",
-            //     tabContent: (
-            //       <Menu />
-            //     )
-            //   },
-            //   {
-            //     tabName: "Settings",
-            //     tabContent: (
-            //       <Menu />
-            //     )
-            //   }
-            // ]
             }
           />
         </GridItem>
       </GridContainer>
     </div>
-    //   </div>
-    // </div>
+
   );
 }

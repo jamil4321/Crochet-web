@@ -16,6 +16,11 @@ const reducer = (state, action) => {
                 ...state,
                 img:action.payload
             }
+        case 'ADDTOCART':
+            return{
+                ...state,
+                cart:[...state.cart,action.payload]
+            }
         default:
             return state;
     }

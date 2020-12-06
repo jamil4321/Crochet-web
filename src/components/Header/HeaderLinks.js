@@ -1,29 +1,30 @@
 /*eslint-disable*/
 import React from "react";
-import DeleteIcon from "@material-ui/icons/Delete";
-import IconButton from "@material-ui/core/IconButton";
-// react components for routing our app without refresh
-import { Link } from "react-router-dom";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
-
+import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 // @material-ui/icons
-import { Apps, CloudDownload } from "@material-ui/icons";
 
-// core components
-import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
-
+import Badge from '@material-ui/core/Badge';
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
+import {useSelector} from 'react-redux'
 
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
+  const {cart}= useSelector((state) => {
+    return {
+      cart: state.cart,
+    };
+  })
+  console.log('cart',cart)
+  console.log('cartLength',cart.length)
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
@@ -44,6 +45,18 @@ export default function HeaderLinks(props) {
           className={classes.navLink}
         >
           Products
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button
+          color="transparent"
+          href="https://www.instagram.com/CreativeTimOfficial?ref=creativetim"
+          target="_blank"
+          className={classes.navLink}
+        >
+      <Badge badgeContent={cart.length} color={cart.length > 0 ? "primary":"error"}>
+          <ShoppingBasketIcon />
+          </Badge>
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
@@ -79,6 +92,7 @@ export default function HeaderLinks(props) {
             <i className={classes.socialIcons + " fab fa-instagram"} />
           </Button>
         </Tooltip>
+
       </ListItem>
     </List>
   );

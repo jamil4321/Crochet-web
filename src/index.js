@@ -19,7 +19,8 @@ const middleWare = [thunk];
 const initialState = {
   subCat:[],
   cat:[],
-  img:[]
+  img:[],
+  cart:[]
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
