@@ -1,25 +1,31 @@
 const reducer = (state, action) => {
     switch (action.type) {
         case 'DATAFROMFIREBASE':
-        console.log('data')
+            console.log('data')
             return {
                 ...state,
-                subCat:action.payload
+                subCat: action.payload,
+                isDataLoaded: true
             }
         case 'DATAFROMFIREBASECAT':
             return {
                 ...state,
-                cat:action.payload
+                cat: action.payload
             }
         case 'DATAFROMFIREBASEIMAGES':
             return {
                 ...state,
-                img:action.payload
+                img: action.payload,
+
             }
         case 'ADDTOCART':
-            return{
+            const cartItem = {
+                ...action.payload,
+                itemAmount: action.payload.qty * action.payload.itemPrice
+            }
+            return {
                 ...state,
-                cart:[...state.cart,action.payload]
+                cart: [...state.cart, cartItem]
             }
         default:
             return state;

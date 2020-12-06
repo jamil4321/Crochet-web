@@ -25,7 +25,7 @@ import IconButton from "@material-ui/core/IconButton";
 
 import Close from "@material-ui/icons/Close";
 
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CustomInput from "components/CustomInput/CustomInput.js";
 
 
@@ -47,7 +47,7 @@ const Menu = (props) => {
   const [open, setOpen] = React.useState(false);
   const [itemData, setItemData] = React.useState([]);
   const [srcImg, setImg] = React.useState([]);
-  const [qty,setQty] = React.useState(1)
+  const [qty, setQty] = React.useState(1)
   const handleOpen = (data, img) => {
     setOpen(true);
     setItemData(data);
@@ -66,23 +66,26 @@ const Menu = (props) => {
       img: state.img,
     };
   });
-  const dispatch= useDispatch();
+  const dispatch = useDispatch();
   const onSubmit = () => {
-    const obj = {
-      itemId: itemData.itemId,
-      itemName: itemData.itemName,
-      primaryColor,
-      secondaryColor,
-      itemPrice: itemData.price,
-      qty
-    };
-    dispatch({type:'ADDTOCART',payload:obj})
+    if (primaryColor !== "" && secondaryColor !== "") {
+      const obj = {
+        itemId: itemData.itemId,
+        itemName: itemData.itemName,
+        primaryColor,
+        secondaryColor,
+        itemPrice: itemData.price,
+        img: srcImg,
+        qty
+      };
+      dispatch({ type: 'ADDTOCART', payload: obj })
 
-    setOpen(false);
-    setItemData([]);
-    setSecondaryColor("");
-    setPrimaryColor("");
-    setQty(1)
+      setOpen(false);
+      setItemData([]);
+      setSecondaryColor("");
+      setPrimaryColor("");
+      setQty(1)
+    }
   };
 
   const filterCat = Object.values(subCat).filter(
@@ -149,25 +152,26 @@ const Menu = (props) => {
           disableTypography
           className={classes.modalHeader}
         >
-       <div style={{display:'flex' ,justifyContent:'space-around'}}> <h4 className={classes.modalTitle}>{itemData.itemName}</h4>
-          <IconButton
-            className={classes.modalCloseButton}
-            key="close"
-            aria-label="Close"
-            color="inherit"
-            onClick={() => handleClose()}
-          >
-            <Close className={classes.modalClose} />
-          </IconButton></div>
-          
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <h4 className={classes.modalTitle} >{itemData.itemName}</h4>
+            <IconButton
+              className={classes.modalCloseButton}
+              key="close"
+              aria-label="Close"
+              color="inherit"
+              onClick={() => handleClose()}
+            >
+              <Close className={classes.modalClose} />
+            </IconButton></div>
+
         </DialogTitle>
         <DialogContent
           id="modal-slide-description"
           className={classes.modalBody}
         >
-          <div style={{ display: "flex"}}>
+          <div style={{ display: "flex" }}>
             <div>
-              {!!srcImg &&(<img
+              {!!srcImg && (<img
                 src={srcImg.url}
                 alt={srcImg.name}
                 style={{
@@ -176,7 +180,7 @@ const Menu = (props) => {
                 }}
               />)}
             </div>
-            <div style={{marginLeft:10}}>
+            <div style={{ marginLeft: 10 }}>
               <CustomInput
                 labelText="Type Your Primary Color Name"
                 id="Primary"
@@ -195,7 +199,7 @@ const Menu = (props) => {
                   fullWidth: true,
                 }}
                 inputProps={{
-                  
+
                   value: secondaryColor,
                   onChange: (e) => setSecondaryColor(e.target.value),
                 }}
@@ -207,9 +211,9 @@ const Menu = (props) => {
                   fullWidth: true,
                 }}
                 inputProps={{
-                  type:'number',
+                  type: 'number',
                   value: qty,
-                  onChange: (e) => setQty(e.target.value),
+                  onChange: (e) => e.target.value > 0 ? setQty(e.target.value) : null,
                 }}
               />
             </div>
@@ -218,7 +222,7 @@ const Menu = (props) => {
         <DialogActions
           className={classes.modalFooter + " " + classes.modalFooterCenter}
         >
-          <Button onClick={() => handleClose()}>Cancel</Button>
+          <Button onClick={() => handleClose()} color="danger">Cancel</Button>
           <Button onClick={() => onSubmit()} color="success">
             Confirm
           </Button>

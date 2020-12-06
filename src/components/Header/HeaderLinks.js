@@ -13,26 +13,25 @@ import { Link } from "react-router-dom";
 import Button from "components/CustomButtons/Button.js";
 import Badge from '@material-ui/core/Badge';
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
-  const {cart}= useSelector((state) => {
+  const { cart } = useSelector((state) => {
     return {
       cart: state.cart,
     };
   })
-  console.log('cart',cart)
-  console.log('cartLength',cart.length)
+  console.log('cart', cart)
+  console.log('cartLength', cart.length)
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
+          href="#About"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         >
           About
@@ -40,26 +39,27 @@ export default function HeaderLinks(props) {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
+          href="#Products"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         >
           Products
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <Button
-          color="transparent"
-          to="/login-page"
-          className={classes.navLink}
-        >
-        
-      <Badge badgeContent={cart.length} color={cart.length > 0 ? "primary":"danger"}>
-          <Link to="/login-page" style={{color:"inherit"}}><ShoppingBasketIcon /></Link>
-          </Badge>
+        <Link to="/cart" style={{ color: "inherit" }}>
+          <Button
+            color="transparent"
+            to="/cart"
+            className={classes.navLink}
+          >
 
-        </Button>
+            <Badge badgeContent={cart.length} color={cart.length > 0 ? "primary" : "danger"}>
+              <ShoppingBasketIcon />
+            </Badge>
+
+          </Button>
+        </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Tooltip
