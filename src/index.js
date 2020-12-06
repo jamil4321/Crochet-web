@@ -17,10 +17,11 @@ import { Provider } from 'react-redux';
 import Reducer from './Store/Reducer'
 const middleWare = [thunk];
 const initialState = {
-  subCat:[],
-  cat:[],
-  img:[],
-  cart:[]
+  isDataLoaded: false,
+  subCat: [],
+  cat: [],
+  img: [],
+  cart: []
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -35,14 +36,14 @@ var hist = createBrowserHistory();
 
 ReactDOM.render(
   <Provider store={store}>
-  <Router history={hist}>
-    <Switch>
-      <Route exact path="/" component={LandingPage} />
-      <Route path="/form" component={Form} />
-      <Route path="/login-page" component={LoginPage} />
-      <Route path="/landing-page" component={Components} />
-    </Switch>
-  </Router>
+    <Router history={hist}>
+      <Switch>
+        <Route exact path="/" component={LandingPage} />
+        <Route path="/form" component={Form} />
+        <Route path="/login-page" component={LoginPage} />
+        <Route path="/cart" component={Components} />
+      </Switch>
+    </Router>
   </Provider>,
   document.getElementById("root")
 );
