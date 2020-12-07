@@ -6,8 +6,8 @@ class Form extends Component {
     state = {
         ItemName: '',
         setCategory: '',
-        cat:["KeyChains","HandBags & Clutches","Accessories"],
-        price:'',
+        cat: ["KeyChains", "HandBags & Clutches", "Accessories"],
+        price: '',
         pictures: []
     }
     onHandleChange = (e) => {
@@ -20,7 +20,6 @@ class Form extends Component {
         });
     }
     onSubmit = () => {
-        console.log(this.state)
         let id = `${this.state.ItemName}-${Math.floor(Math.random() * 10000000000000)}`
         let data = {
             itemId: id,
@@ -31,9 +30,9 @@ class Form extends Component {
         }
         let uploadRef = firebase.storage().ref(`images/${data.itemId}`).put(data.pictures);
         uploadRef.on('state_changed', snapshot => { }, err => {
-            console.log(err)
+            err
         }, () => {
-            firebase.storage().ref('images').child(`${data.itemId}`).getDownloadURL().then(url => console.log(url))
+            firebase.storage().ref('images').child(`${data.itemId}`).getDownloadURL().then(url => url)
         })
         firebase.database().ref(`subCat/${data.itemId}`).set(data)
         this.setState({

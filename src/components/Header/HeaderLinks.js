@@ -24,8 +24,6 @@ export default function HeaderLinks(props) {
       cart: state.cart,
     };
   })
-  console.log('cart', cart)
-  console.log('cartLength', cart.length)
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
