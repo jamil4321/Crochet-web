@@ -108,36 +108,7 @@ export default function LoginPage(props) {
       >
 
         <div className={classes.container}>
-          {cartNull ? <SnackbarContent
-            message={
-              <span>
-                <b>INFO ALERT:</b> Kindly Select Atleast One or more Record
-            </span>
-            }
-            close
-            color="warning"
-            icon={Warning}
-          /> : null}
-          {dataNull ? <SnackbarContent
-            message={
-              <span>
-                <b>INFO ALERT:</b> Kindly Fill Compelte from
-            </span>
-            }
-            close
-            color="warning"
-            icon={Warning}
-          /> : null}
-          {dataSend ? <SnackbarContent
-            message={
-              <span>
-                <b>INFO ALERT:</b> Kindly Fill Compelte from
-            </span>
-            }
-            close
-            color="success"
-            icon={Check}
-          /> : null}
+          
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={8}>
               <Card className={classes[cardAnimaton]}>
@@ -261,6 +232,36 @@ export default function LoginPage(props) {
                     <Button color="success" onClick={SubmitOder}>Confirm Order</Button>
                   </CardFooter>
                 </form>
+                {cartNull ? <SnackbarContent
+            message={
+              <span>
+                <b>INFO ALERT:</b> Kindly Select Atleast One or more Record
+            </span>
+            }
+            close
+            color="warning"
+            icon={Warning}
+          /> : null}
+          {dataNull ? <SnackbarContent
+            message={
+              <span>
+                <b>INFO ALERT:</b> Kindly Fill Compelte from
+            </span>
+            }
+            close
+            color="warning"
+            icon={Warning}
+          /> : null}
+          {dataSend ? <SnackbarContent
+            message={
+              <span>
+                <b>INFO ALERT:</b> Your Order Has Been Confirmed
+            </span>
+            }
+            close
+            color="success"
+            icon={Check}
+          /> : null}
               </Card>
             </GridItem>
           </GridContainer>
