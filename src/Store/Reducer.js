@@ -1,7 +1,6 @@
 const reducer = (state, action) => {
     switch (action.type) {
         case 'DATAFROMFIREBASE':
-            console.log('data')
             return {
                 ...state,
                 subCat: action.payload,

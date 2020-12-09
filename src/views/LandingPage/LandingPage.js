@@ -60,10 +60,10 @@ export default function LandingPage(props) {
             name: imgRef.name,
             url: url
           }
-          console.log(url)
+
           await image.push(imgUrl)
         })
-        console.log(imgRef)
+
       })
       dispatch({ type: 'DATAFROMFIREBASEIMAGES', payload: image })
     })
