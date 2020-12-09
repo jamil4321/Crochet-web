@@ -31,7 +31,7 @@ export default function TeamSection() {
   );
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>Here is our Best Products</h2>
+      <h2 className={classes.title}>Here are our Best Products</h2>
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
@@ -79,7 +79,7 @@ export default function TeamSection() {
           <Card plain>
           <CardBody>
                 <p className={classes.description}>
-                All are products are made customized according to your choice of colors and designs.
+                All our products are made customized according to your choice of colors and designs.
                 </p>
               </CardBody>
           </Card>

@@ -16,17 +16,25 @@ const useStyles = makeStyles(styles);
 
 export default function WorkSection() {
   const classes = useStyles();
-  return (
+  const [email,setEmail] =React.useState('')
+  const [name,setName]= React.useState('');
+  const [feedBack,setFeedBack]=React.useState('');
+  const onSubmit = ()=>{
+    setEmail('')
+    setName('')
+    setFeedBack('')
+  }
+    return (
     <div className={classes.section}>
       <GridContainer justify="center">
         <GridItem cs={12} sm={12} md={8}>
-          <h2 className={classes.title}>Order Now</h2>
-          <h4 className={classes.description}>
+          <h2 className={classes.title}>FeedBack</h2>
+          {/* <h4 className={classes.description}>
             Divide details about your product or agency work into parts. Write a
             few lines about each one and contact us about any further
             collaboration. We will responde get back to you in a couple of
             hours.
-          </h4>
+          </h4> */}
           <form>
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
@@ -36,6 +44,11 @@ export default function WorkSection() {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  inputProps={{
+                  type: 'text',
+                  value: name,
+                  onChange: (e) =>  setName(e.target.value) ,
+                }}
                 />
               </GridItem>
               <GridItem xs={12} sm={12} md={6}>
@@ -45,6 +58,11 @@ export default function WorkSection() {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  inputProps={{
+                  type: 'text',
+                  value: email,
+                  onChange: (e) =>  setEmail(e.target.value) ,
+                }}
                 />
               </GridItem>
               <CustomInput
@@ -56,11 +74,15 @@ export default function WorkSection() {
                 }}
                 inputProps={{
                   multiline: true,
-                  rows: 5
+                  rows: 5,
+                  value: feedBack,
+                  onChange: (e) =>  setFeedBack(e.target.value)
                 }}
               />
+
+
               <GridItem xs={12} sm={12} md={4}>
-                <Button color="info">Send Message</Button>
+                <Button color="info" onClick={onSubmit}>Send Message</Button>
               </GridItem>
             </GridContainer>
           </form>

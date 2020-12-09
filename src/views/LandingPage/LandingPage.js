@@ -92,9 +92,9 @@ export default function LandingPage(props) {
                 <GridItem xs={12} sm={12} md={6}>
                   <div className={classes.brand}>
                     <h1 className={classes.title}>Crochet Diaries</h1>
-                    <h3 className={classes.subtitle}>
+                    {/* <h3 className={classes.subtitle}>
                       A Badass Material-UI Kit based on Material Design.
-                </h3>
+                </h3> */}
                   </div>
                 </GridItem>
               </GridContainer>
