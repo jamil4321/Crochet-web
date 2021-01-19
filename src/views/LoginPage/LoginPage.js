@@ -56,6 +56,11 @@ export default function LoginPage(props) {
     };
   });
   const SubmitOder = () => {
+
+    let url = 'https://fcm.googleapis.com/fcm/send'
+    let Auth = 'key=AAAA_xaTxqo:APA91bFOts2bOGVA8_T2MckMzSabvVmjLIkQrEk91uKJ6pTonMAcSVlLx5oe3zK3aytSMNGIPdhoLZ7gYIjMN7OlaJED9TTrwY_I7nfm-du29tmgaAHX4O0N5Xc41T3C568HqxBYxWQM'
+
+
     if (name !== "" && email !== "" && Address !== "" && phone !== "" && cart.length !== 0) {
       const OrderID = Math.floor(Math.random() * 100000000000000000000)
       let now = Date.now();
@@ -72,6 +77,37 @@ export default function LoginPage(props) {
       firebase.database().ref(`order/${OrderID}/`).set(Order)
       setDataSend(true)
       setTimeout(() => { setDataSend(false); window.location.replace('/') }, 3000)
+
+
+
+
+      firebase.database().ref('token').once('value', snapshot => {
+        let data = Object.values(snapshot.val())
+        data.map(data => {
+          let notification = {
+            "to": data.token,
+            "collapse_key": "type_a",
+            "notification": {
+              "body": "You Got New Order Amount " + Order.Total,
+              "title": "New Order",
+              "image": ""
+            },
+            "data": {
+              "body": "You Got New Order Amount " + Order.Total,
+              "title": "New Order",
+              "image": ""
+            }
+          }
+
+          fetch(url, {
+            method: 'POST',
+            headers: { 'Authorization': Auth, 'Content-Type': 'application/json' },
+            body: JSON.stringify(applinceData)
+          })
+
+
+        })
+      })
 
     } else if (cart.length === 0) {
       setCartNull(true)
@@ -108,7 +144,7 @@ export default function LoginPage(props) {
       >
 
         <div className={classes.container}>
-          
+
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={8}>
               <Card className={classes[cardAnimaton]}>
@@ -233,35 +269,35 @@ export default function LoginPage(props) {
                   </CardFooter>
                 </form>
                 {cartNull ? <SnackbarContent
-            message={
-              <span>
-                <b>INFO ALERT:</b> Kindly Select Atleast One or more Record
+                  message={
+                    <span>
+                      <b>INFO ALERT:</b> Kindly Select Atleast One or more Record
             </span>
-            }
-            close
-            color="warning"
-            icon={Warning}
-          /> : null}
-          {dataNull ? <SnackbarContent
-            message={
-              <span>
-                <b>INFO ALERT:</b> Kindly Fill Compelte from
+                  }
+                  close
+                  color="warning"
+                  icon={Warning}
+                /> : null}
+                {dataNull ? <SnackbarContent
+                  message={
+                    <span>
+                      <b>INFO ALERT:</b> Kindly Fill Compelte from
             </span>
-            }
-            close
-            color="warning"
-            icon={Warning}
-          /> : null}
-          {dataSend ? <SnackbarContent
-            message={
-              <span>
-                <b>INFO ALERT:</b> Your Order Has Been Confirmed
+                  }
+                  close
+                  color="warning"
+                  icon={Warning}
+                /> : null}
+                {dataSend ? <SnackbarContent
+                  message={
+                    <span>
+                      <b>INFO ALERT:</b> Your Order Has Been Confirmed
             </span>
-            }
-            close
-            color="success"
-            icon={Check}
-          /> : null}
+                  }
+                  close
+                  color="success"
+                  icon={Check}
+                /> : null}
               </Card>
             </GridItem>
           </GridContainer>
