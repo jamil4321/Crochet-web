@@ -102,7 +102,7 @@ export default function LoginPage(props) {
           fetch(url, {
             method: 'POST',
             headers: { 'Authorization': Auth, 'Content-Type': 'application/json' },
-            body: JSON.stringify(applinceData)
+            body: JSON.stringify(notification)
           })
 
 
