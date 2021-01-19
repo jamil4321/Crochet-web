@@ -67,6 +67,7 @@ export default function LandingPage(props) {
       })
       dispatch({ type: 'DATAFROMFIREBASEIMAGES', payload: image })
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
