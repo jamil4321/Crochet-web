@@ -101,6 +101,7 @@ export default function LoginPage(props) {
             headers: { 'Authorization': Auth, 'Content-Type': 'application/json' },
             body: JSON.stringify(notification)
           })
+          promise = { ...promise, null: null }
           return promise
         })
       })
