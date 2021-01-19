@@ -15,7 +15,6 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 img: action.payload,
-
             }
         case 'ADDTOCART':
             const cartItem = {
