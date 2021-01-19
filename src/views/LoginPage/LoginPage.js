@@ -78,14 +78,11 @@ export default function LoginPage(props) {
       setDataSend(true)
       setTimeout(() => { setDataSend(false); window.location.replace('/') }, 3000)
 
-
-
-
       firebase.database().ref('token').once('value', snapshot => {
-        let data = Object.values(snapshot.val())
-        data.map(data => {
+        let value = Object.values(snapshot.val())
+        value.map(data => {
           let notification = {
-            "to": data.token,
+            "to": data,
             "collapse_key": "type_a",
             "notification": {
               "body": "You Got New Order Amount " + Order.Total,
@@ -99,12 +96,11 @@ export default function LoginPage(props) {
             }
           }
 
-          fetch(url, {
+          let promise = fetch(url, {
             method: 'POST',
             headers: { 'Authorization': Auth, 'Content-Type': 'application/json' },
             body: JSON.stringify(notification)
           })
-
 
         })
       })
@@ -122,7 +118,6 @@ export default function LoginPage(props) {
   if (cart.length > 0) {
     Total = parseFloat(cart.map(item => item.itemAmount).reduce((a, b) => a + b)).toFixed(2);
   }
-  console.log(cart);
   return (
     <div>
 
